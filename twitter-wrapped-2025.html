@@ -302,6 +302,7 @@
       align-items: center;
       gap: 16px;
       color: var(--text-dim);
+      flex-wrap: wrap;
     }
 
     .quote-stats {
@@ -433,9 +434,10 @@
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 24px;
       padding: 32px;
+      overflow-x: auto;
     }
 
-    /* Bar Chart */
+    /* Bar Chart (horizontal) */
     .bar-chart {
       display: flex;
       flex-direction: column;
@@ -449,10 +451,11 @@
     }
 
     .bar-label {
-      width: 40px;
+      width: 80px;
       font-size: 12px;
       color: var(--text-dim);
       text-align: right;
+      flex-shrink: 0;
     }
 
     .bar-track {
@@ -468,98 +471,75 @@
       height: 100%;
       border-radius: 8px;
       transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 12px;
+      min-width: fit-content;
     }
 
-    .bar-fill::after {
-      content: attr(data-value);
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
+    .bar-value {
       font-size: 12px;
       font-weight: 600;
       color: var(--bg-dark);
     }
 
-    /* Clock Chart */
-    .clock-container {
+    /* Vertical Bar Chart (months/days) */
+    .vertical-chart {
       display: flex;
-      justify-content: center;
-      padding: 40px;
+      align-items: flex-end;
+      justify-content: space-between;
+      height: 280px;
+      gap: 8px;
+      min-width: 600px;
     }
 
-    .clock {
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: var(--bg-card);
-      border: 2px solid rgba(255,255,255,0.1);
+    .v-bar {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+    }
+
+    .v-bar-container {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       position: relative;
     }
 
-    .clock-center {
+    .v-bar-fill {
+      width: 100%;
+      border-radius: 6px 6px 0 0;
+      transition: height 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      min-height: 4px;
+    }
+
+    .v-bar-value {
       position: absolute;
-      top: 50%;
+      top: -24px;
       left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
+      transform: translateX(-50%);
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
-    .clock-center-value {
-      font-size: 48px;
-      font-weight: 800;
-      color: var(--cyan);
+    .v-bar:hover .v-bar-value {
+      opacity: 1;
     }
 
-    .clock-center-label {
+    .v-bar-label {
       font-size: 12px;
       color: var(--text-dim);
+      margin-top: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    .clock-hour {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform-origin: center;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      width: 50%;
-      height: 2px;
-    }
-
-    .clock-hour-bar {
-      height: 100%;
-      background: var(--cyan);
-      border-radius: 4px;
-      transition: all 0.5s;
-    }
-
-    .clock-hour-label {
-      position: absolute;
-      font-size: 10px;
-      color: var(--text-dimmer);
-    }
-
-    /* Heatmap */
-    .heatmap {
-      display: grid;
-      grid-template-columns: repeat(53, 1fr);
-      gap: 2px;
-    }
-
-    .heatmap-cell {
-      aspect-ratio: 1;
-      border-radius: 2px;
-      transition: transform 0.2s;
-    }
-
-    .heatmap-cell:hover {
-      transform: scale(1.5);
-      z-index: 10;
     }
 
     /* Top List */
@@ -594,6 +574,7 @@
       font-weight: 800;
       font-size: 18px;
       border-radius: 12px;
+      flex-shrink: 0;
     }
 
     .top-rank.gold { background: linear-gradient(135deg, #ffd60a, #ffaa00); color: var(--bg-dark); }
@@ -603,12 +584,16 @@
 
     .top-info {
       flex: 1;
+      min-width: 0;
     }
 
     .top-name {
       font-weight: 600;
       font-size: 18px;
       margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .top-handle {
@@ -620,107 +605,73 @@
       font-size: 24px;
       font-weight: 700;
       color: var(--cyan);
+      flex-shrink: 0;
+    }
+
+    .top-count-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
     }
 
     /* Word Cloud */
     .word-cloud {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 12px 20px;
       justify-content: center;
       align-items: center;
-      padding: 40px;
+      padding: 40px 20px;
+      min-height: 300px;
     }
 
     .word {
       transition: transform 0.3s, color 0.3s;
       cursor: default;
+      line-height: 1.2;
     }
 
     .word:hover {
-      transform: scale(1.1);
-      color: var(--cyan) !important;
+      transform: scale(1.15);
     }
 
-    /* Emoji Bar */
+    /* Emoji Grid */
     .emoji-grid {
       display: flex;
       justify-content: center;
-      gap: 32px;
+      gap: 24px;
       flex-wrap: wrap;
+      padding: 20px;
     }
 
     .emoji-item {
       text-align: center;
       transition: transform 0.3s;
+      padding: 16px;
+      background: var(--bg-card);
+      border-radius: 16px;
+      min-width: 90px;
     }
 
     .emoji-item:hover {
-      transform: scale(1.2);
+      transform: scale(1.1);
     }
 
     .emoji-char {
-      font-size: 64px;
+      font-size: 48px;
       margin-bottom: 8px;
     }
 
     .emoji-count {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
       color: var(--text-dim);
-    }
-
-    /* Monthly Chart */
-    .month-chart {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      height: 300px;
-      gap: 8px;
-      padding-top: 40px;
-    }
-
-    .month-bar {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .month-bar-fill {
-      width: 100%;
-      border-radius: 8px 8px 0 0;
-      transition: height 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-    }
-
-    .month-bar-fill::before {
-      content: attr(data-value);
-      position: absolute;
-      top: -24px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 12px;
-      font-weight: 600;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .month-bar:hover .month-bar-fill::before {
-      opacity: 1;
-    }
-
-    .month-label {
-      font-size: 12px;
-      color: var(--text-dim);
-      text-transform: uppercase;
     }
 
     /* Fun Facts */
     .fun-facts {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 24px;
     }
 
@@ -818,84 +769,6 @@
       transform: translateY(0);
     }
 
-    /* Counter Animation */
-    .counter {
-      display: inline-block;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      section {
-        padding: 60px 0;
-      }
-
-      .breakdown-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .clock {
-        width: 300px;
-        height: 300px;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .emoji-char {
-        font-size: 48px;
-      }
-
-      .month-chart {
-        height: 200px;
-      }
-    }
-
-    /* Section Separators */
-    .section-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-      margin: 40px 0;
-    }
-
-    /* Glow effects */
-    .glow-cyan {
-      text-shadow: 0 0 40px rgba(0, 245, 212, 0.5);
-    }
-
-    .glow-magenta {
-      text-shadow: 0 0 40px rgba(247, 37, 133, 0.5);
-    }
-
-    /* Day distribution */
-    .day-chart {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      height: 200px;
-      gap: 16px;
-    }
-
-    .day-bar {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .day-bar-fill {
-      width: 100%;
-      border-radius: 8px;
-      transition: height 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .day-label {
-      font-size: 14px;
-      color: var(--text-dim);
-      font-weight: 500;
-    }
-
     /* Pill badges */
     .pill {
       display: inline-flex;
@@ -915,6 +788,11 @@
     .pill.magenta {
       background: rgba(247, 37, 133, 0.15);
       color: var(--magenta);
+    }
+
+    .pill.lime {
+      background: rgba(184, 248, 58, 0.15);
+      color: var(--lime);
     }
 
     /* Loading screen */
@@ -961,6 +839,65 @@
     @keyframes loading {
       from { width: 0; }
       to { width: 100%; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      section {
+        padding: 60px 0;
+        min-height: auto;
+      }
+
+      .breakdown-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .emoji-char {
+        font-size: 36px;
+      }
+
+      .emoji-item {
+        min-width: 70px;
+        padding: 12px;
+      }
+
+      .vertical-chart {
+        min-width: 500px;
+        height: 200px;
+      }
+
+      .chart-container {
+        padding: 20px;
+      }
+
+      .v-bar-label {
+        font-size: 10px;
+      }
+
+      .word-cloud {
+        padding: 20px 10px;
+      }
+
+      .top-item {
+        padding: 16px;
+      }
+
+      .top-name {
+        font-size: 16px;
+      }
+
+      .top-count {
+        font-size: 20px;
+      }
+
+      .bar-label {
+        width: 60px;
+        font-size: 10px;
+      }
     }
   </style>
 </head>
@@ -1088,7 +1025,7 @@
     <div class="container reveal">
       <h2>Your year, month by month</h2>
       <div class="chart-container">
-        <div class="month-chart" id="monthChart"></div>
+        <div class="vertical-chart" id="monthChart"></div>
       </div>
       <div style="margin-top: 24px; text-align: center;">
         <span class="pill cyan">August was your most active month with 3,321 tweets</span>
@@ -1113,7 +1050,7 @@
     <div class="container reveal">
       <h2>Your favorite day to tweet</h2>
       <div class="chart-container">
-        <div class="day-chart" id="dayChart"></div>
+        <div class="vertical-chart" id="dayChart" style="min-width: 400px;"></div>
       </div>
       <div style="margin-top: 24px; text-align: center;">
         <span class="pill lime">Wednesday is your peak day</span>
@@ -1139,7 +1076,7 @@
   <section class="chart-section">
     <div class="container reveal">
       <h2>Your ride-or-dies</h2>
-      <p style="color: var(--text-dim); margin-bottom: 32px;">The people you talked to the most</p>
+      <p style="color: var(--text-dim); margin-bottom: 32px;">People you @mentioned the most in tweets and replies</p>
       <div class="top-list" id="topMentions"></div>
     </div>
   </section>
@@ -1148,8 +1085,10 @@
   <section class="chart-section">
     <div class="container reveal">
       <h2>Your vocabulary</h2>
-      <p style="color: var(--text-dim); margin-bottom: 32px;">Words you used the most</p>
-      <div class="word-cloud" id="wordCloud"></div>
+      <p style="color: var(--text-dim); margin-bottom: 16px;">Words you used the most in original tweets</p>
+      <div class="chart-container" style="padding: 20px;">
+        <div class="word-cloud" id="wordCloud"></div>
+      </div>
     </div>
   </section>
 
@@ -1157,6 +1096,7 @@
   <section class="chart-section">
     <div class="container reveal">
       <h2>Your emoji game</h2>
+      <p style="color: var(--text-dim); margin-bottom: 32px;">Your most-used emojis this year</p>
       <div class="emoji-grid" id="emojiGrid"></div>
     </div>
   </section>
@@ -1259,19 +1199,28 @@
       { handle: 'djmicrobeads', name: 'djmicrobeads', count: 333 },
       { handle: 'Actualwebutante', name: 'whoreaborealis', count: 332 },
       { handle: 'danielbrottman', name: 'daniel brottman', count: 272 },
-      { handle: 'seconds_0', name: '0.005 Seconds', count: 259 }
+      { handle: 'seconds_0', name: '0.005 Seconds', count: 259 },
+      { handle: 'basilYam', name: 'Ellie', count: 257 },
+      { handle: 'chiotmode', name: 'lumi', count: 238 }
     ];
 
+    // Expanded word list
     const topWords = [
-      ['yeah', 922], ['one', 779], ['good', 673], ['people', 518], ['time', 437],
-      ['well', 428], ['even', 378], ['much', 343], ['way', 339], ['thing', 325],
-      ['lot', 316], ['still', 314], ['want', 309], ['tpot', 252], ['love', 242],
-      ['maybe', 233], ['something', 227], ['most', 222], ['feel', 219], ['actually', 217]
+      ['yeah', 922], ['one', 779], ['good', 673], ['people', 518], ['don', 488],
+      ['time', 437], ['well', 428], ['even', 378], ['much', 343], ['way', 339],
+      ['thing', 325], ['lot', 316], ['still', 314], ['want', 309], ['many', 293],
+      ['see', 280], ['back', 272], ['things', 270], ['bad', 269], ['day', 260],
+      ['other', 254], ['tpot', 252], ['same', 250], ['new', 247], ['love', 242],
+      ['right', 239], ['maybe', 233], ['first', 227], ['something', 227], ['most', 222],
+      ['feel', 219], ['actually', 217], ['kind', 215], ['pretty', 210], ['work', 205],
+      ['need', 198], ['better', 195], ['make', 190], ['world', 185], ['point', 180]
     ];
 
+    // Expanded emoji list
     const topEmojis = [
       ['😇', 146], ['🟩', 127], ['❤️', 118], ['👏', 73], ['🙂', 70],
-      ['🤍', 53], ['🟨', 49], ['🦆', 41], ['🙇', 35]
+      ['🤍', 53], ['🟨', 49], ['🦆', 41], ['🙇', 35], ['✨', 32],
+      ['💀', 28], ['🫶', 25], ['🥺', 22], ['💕', 20], ['🔥', 18]
     ];
 
     // Particles
@@ -1288,89 +1237,75 @@
       }
     }
 
-    // Month Chart
-    function renderMonthChart() {
-      const container = document.getElementById('monthChart');
-      const maxValue = Math.max(...monthlyData);
+    // Vertical Bar Chart (for months and days)
+    function renderVerticalChart(containerId, data, labels, colors) {
+      const container = document.getElementById(containerId);
+      const maxValue = Math.max(...data);
 
-      monthlyData.forEach((value, i) => {
+      data.forEach((value, i) => {
         const bar = document.createElement('div');
-        bar.className = 'month-bar';
+        bar.className = 'v-bar';
+
+        const barContainer = document.createElement('div');
+        barContainer.className = 'v-bar-container';
 
         const fill = document.createElement('div');
-        fill.className = 'month-bar-fill';
-        fill.style.height = '0';
-        fill.style.background = `linear-gradient(to top, hsl(${170 + i * 10}, 100%, 50%), hsl(${170 + i * 10}, 80%, 60%))`;
-        fill.setAttribute('data-value', value.toLocaleString());
+        fill.className = 'v-bar-fill';
+        fill.style.height = '0px';
+        fill.style.background = colors[i % colors.length];
+
+        const valueLabel = document.createElement('div');
+        valueLabel.className = 'v-bar-value';
+        valueLabel.textContent = value.toLocaleString();
+        fill.appendChild(valueLabel);
+
+        barContainer.appendChild(fill);
 
         const label = document.createElement('div');
-        label.className = 'month-label';
-        label.textContent = monthLabels[i];
+        label.className = 'v-bar-label';
+        label.textContent = labels[i];
 
-        bar.appendChild(fill);
+        bar.appendChild(barContainer);
         bar.appendChild(label);
         container.appendChild(bar);
 
+        // Animate after a delay
         setTimeout(() => {
-          fill.style.height = (value / maxValue * 100) + '%';
-        }, 100 + i * 50);
+          const heightPercent = (value / maxValue) * 100;
+          fill.style.height = Math.max(heightPercent, 2) + '%';
+        }, 300 + i * 80);
       });
+    }
+
+    // Month Chart
+    function renderMonthChart() {
+      const colors = [];
+      for (let i = 0; i < 12; i++) {
+        colors.push(`hsl(${170 + i * 15}, 85%, 55%)`);
+      }
+      renderVerticalChart('monthChart', monthlyData, monthLabels, colors);
     }
 
     // Day Chart
     function renderDayChart() {
-      const container = document.getElementById('dayChart');
-      const maxValue = Math.max(...dayData);
-      const colors = ['var(--magenta)', 'var(--purple)', 'var(--blue)', 'var(--cyan)', 'var(--lime)', 'var(--gold)', 'var(--magenta)'];
-
-      dayData.forEach((value, i) => {
-        const bar = document.createElement('div');
-        bar.className = 'day-bar';
-
-        const fill = document.createElement('div');
-        fill.className = 'day-bar-fill';
-        fill.style.height = '0';
-        fill.style.background = colors[i];
-
-        const label = document.createElement('div');
-        label.className = 'day-label';
-        label.textContent = dayLabels[i];
-
-        const valueLabel = document.createElement('div');
-        valueLabel.style.fontSize = '14px';
-        valueLabel.style.fontWeight = '600';
-        valueLabel.style.marginTop = '8px';
-        valueLabel.textContent = value.toLocaleString();
-
-        bar.appendChild(fill);
-        bar.appendChild(label);
-        bar.appendChild(valueLabel);
-        container.appendChild(bar);
-
-        setTimeout(() => {
-          fill.style.height = (value / maxValue * 100) + '%';
-        }, 100 + i * 100);
-      });
+      const colors = ['#f72585', '#7b2cbf', '#4361ee', '#00f5d4', '#b8f83a', '#ffd60a', '#f72585'];
+      renderVerticalChart('dayChart', dayData, dayLabels, colors);
     }
 
-    // Hour Chart
+    // Hour Chart (horizontal bars)
     function renderHourChart() {
       const container = document.getElementById('hourChart');
-      const maxValue = Math.max(...hourlyData);
-      const peakHours = [21, 22, 23, 18, 17]; // Top hours
 
-      // Group into 6 time periods for cleaner display
       const periods = [
-        { label: '12am-4am', hours: [0,1,2,3], total: hourlyData.slice(0,4).reduce((a,b)=>a+b, 0) },
-        { label: '4am-8am', hours: [4,5,6,7], total: hourlyData.slice(4,8).reduce((a,b)=>a+b, 0) },
-        { label: '8am-12pm', hours: [8,9,10,11], total: hourlyData.slice(8,12).reduce((a,b)=>a+b, 0) },
-        { label: '12pm-4pm', hours: [12,13,14,15], total: hourlyData.slice(12,16).reduce((a,b)=>a+b, 0) },
-        { label: '4pm-8pm', hours: [16,17,18,19], total: hourlyData.slice(16,20).reduce((a,b)=>a+b, 0) },
-        { label: '8pm-12am', hours: [20,21,22,23], total: hourlyData.slice(20,24).reduce((a,b)=>a+b, 0) }
+        { label: '12am - 4am', total: hourlyData.slice(0,4).reduce((a,b)=>a+b, 0), color: '#7b2cbf' },
+        { label: '4am - 8am', total: hourlyData.slice(4,8).reduce((a,b)=>a+b, 0), color: '#4361ee' },
+        { label: '8am - 12pm', total: hourlyData.slice(8,12).reduce((a,b)=>a+b, 0), color: '#00f5d4' },
+        { label: '12pm - 4pm', total: hourlyData.slice(12,16).reduce((a,b)=>a+b, 0), color: '#b8f83a' },
+        { label: '4pm - 8pm', total: hourlyData.slice(16,20).reduce((a,b)=>a+b, 0), color: '#ffd60a' },
+        { label: '8pm - 12am', total: hourlyData.slice(20,24).reduce((a,b)=>a+b, 0), color: '#f72585' }
       ];
 
       const maxPeriod = Math.max(...periods.map(p => p.total));
-      const colors = ['var(--purple)', 'var(--blue)', 'var(--cyan)', 'var(--lime)', 'var(--gold)', 'var(--magenta)'];
 
       periods.forEach((period, i) => {
         const row = document.createElement('div');
@@ -1379,16 +1314,19 @@
         const label = document.createElement('div');
         label.className = 'bar-label';
         label.textContent = period.label;
-        label.style.width = '80px';
 
         const track = document.createElement('div');
         track.className = 'bar-track';
 
         const fill = document.createElement('div');
         fill.className = 'bar-fill';
-        fill.style.width = '0';
-        fill.style.background = colors[i];
-        fill.setAttribute('data-value', period.total.toLocaleString());
+        fill.style.width = '0%';
+        fill.style.background = period.color;
+
+        const valueSpan = document.createElement('span');
+        valueSpan.className = 'bar-value';
+        valueSpan.textContent = period.total.toLocaleString();
+        fill.appendChild(valueSpan);
 
         track.appendChild(fill);
         row.appendChild(label);
@@ -1397,7 +1335,7 @@
 
         setTimeout(() => {
           fill.style.width = (period.total / maxPeriod * 100) + '%';
-        }, 100 + i * 100);
+        }, 300 + i * 100);
       });
     }
 
@@ -1408,7 +1346,6 @@
       topMentions.forEach((mention, i) => {
         const item = document.createElement('div');
         item.className = 'top-item';
-        item.style.animationDelay = (i * 0.1) + 's';
 
         const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : 'default';
 
@@ -1418,7 +1355,10 @@
             <div class="top-name">${mention.name}</div>
             <div class="top-handle">@${mention.handle}</div>
           </div>
-          <div class="top-count">${mention.count}</div>
+          <div style="text-align: right;">
+            <div class="top-count">${mention.count}</div>
+            <div class="top-count-label">mentions</div>
+          </div>
         `;
 
         container.appendChild(item);
@@ -1429,20 +1369,26 @@
     function renderWordCloud() {
       const container = document.getElementById('wordCloud');
       const maxCount = topWords[0][1];
-      const colors = ['var(--cyan)', 'var(--magenta)', 'var(--lime)', 'var(--gold)', 'var(--purple)'];
+      const colors = ['#00f5d4', '#f72585', '#b8f83a', '#ffd60a', '#7b2cbf', '#4361ee'];
 
       topWords.forEach(([word, count], i) => {
         const span = document.createElement('span');
         span.className = 'word';
         span.textContent = word;
 
-        const size = 16 + (count / maxCount) * 48;
-        const weight = count > 500 ? 800 : count > 300 ? 600 : 400;
+        // Scale from 14px to 56px based on count
+        const minSize = 14;
+        const maxSize = 56;
+        const ratio = count / maxCount;
+        const size = minSize + (ratio * (maxSize - minSize));
+
+        // Weight based on frequency
+        const weight = ratio > 0.7 ? 800 : ratio > 0.4 ? 600 : ratio > 0.2 ? 500 : 400;
 
         span.style.fontSize = size + 'px';
         span.style.fontWeight = weight;
         span.style.color = colors[i % colors.length];
-        span.style.opacity = 0.5 + (count / maxCount) * 0.5;
+        span.style.opacity = 0.6 + (ratio * 0.4);
 
         container.appendChild(span);
       });
@@ -1457,43 +1403,13 @@
         item.className = 'emoji-item';
         item.innerHTML = `
           <div class="emoji-char">${emoji}</div>
-          <div class="emoji-count">${count}</div>
+          <div class="emoji-count">×${count}</div>
         `;
         container.appendChild(item);
       });
     }
 
-    // Counter Animation
-    function animateCounters() {
-      const counters = document.querySelectorAll('.counter[data-target]');
-
-      counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-target'));
-        const duration = 2000;
-        const start = Date.now();
-
-        function update() {
-          const elapsed = Date.now() - start;
-          const progress = Math.min(elapsed / duration, 1);
-
-          // Easing function
-          const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-          const current = Math.floor(target * easeOutQuart);
-
-          counter.textContent = current.toLocaleString();
-
-          if (progress < 1) {
-            requestAnimationFrame(update);
-          } else {
-            counter.textContent = target.toLocaleString();
-          }
-        }
-
-        update();
-      });
-    }
-
-    // Reveal on scroll
+    // Reveal on scroll with counter animation
     function handleReveal() {
       const reveals = document.querySelectorAll('.reveal');
 
@@ -1504,7 +1420,6 @@
         if (top < windowHeight * 0.85) {
           reveal.classList.add('visible');
 
-          // Animate counters in this section
           const counters = reveal.querySelectorAll('.counter[data-target]');
           counters.forEach(counter => {
             if (!counter.classList.contains('animated')) {
@@ -1559,16 +1474,6 @@
     });
 
     window.addEventListener('scroll', handleReveal);
-
-    // Smooth scroll for better experience
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
   </script>
 </body>
 </html>

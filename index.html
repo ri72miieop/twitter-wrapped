@@ -300,6 +300,64 @@
       user-select: none;
     }
 
+    /* Viral tweet card */
+    .viral-tweet-card {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .viral-tweet-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .viral-tweet-image {
+      flex-shrink: 0;
+      width: 120px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .viral-tweet-image:hover {
+      transform: scale(1.05);
+      border-color: var(--cyan);
+    }
+
+    .viral-tweet-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .quoted-tweet-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--cyan);
+      font-size: 14px;
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+
+    .quoted-tweet-link:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    .quoted-tweet-link svg {
+      width: 14px;
+      height: 14px;
+    }
+
     .quote-text {
       font-family: 'Instrument Serif', serif;
       font-size: clamp(32px, 5vw, 64px);
@@ -967,22 +1025,25 @@
       }
 
       .emoji-grid {
-        gap: 10px;
-        padding: 8px;
+        gap: 6px;
+        padding: 4px;
+        max-height: none;
+        overflow-y: visible;
       }
 
       .emoji-char {
-        font-size: 32px;
+        font-size: 24px;
+        margin-bottom: 2px;
       }
 
       .emoji-item {
-        min-width: 60px;
-        padding: 10px 8px;
-        border-radius: 12px;
+        min-width: 52px;
+        padding: 6px 4px;
+        border-radius: 10px;
       }
 
       .emoji-count {
-        font-size: 13px;
+        font-size: 11px;
       }
 
       .vertical-chart {
@@ -1095,6 +1156,19 @@
       .quote-mark {
         font-size: 150px;
         top: -30px;
+      }
+
+      .viral-tweet-card {
+        gap: 16px;
+        padding: 16px;
+      }
+
+      .viral-tweet-image {
+        width: 80px;
+      }
+
+      .quoted-tweet-link {
+        font-size: 12px;
       }
 
       .quote-stats {
@@ -1220,9 +1294,19 @@
   <!-- Viral Tweet -->
   <section class="quote-section">
     <div class="container reveal">
-      <div class="quote-mark">"</div>
-      <div class="big-stat-label" style="margin-bottom: 24px;">Your biggest tweet</div>
-      <div class="quote-text">incredible</div>
+      <div class="big-stat-label" style="margin-bottom: 16px;">Your biggest tweet</div>
+      <div class="viral-tweet-card">
+        <div class="viral-tweet-content">
+          <div class="quote-text" style="font-size: clamp(28px, 5vw, 48px); margin-bottom: 12px;">incredible</div>
+          <a href="https://x.com/DGlaucomflecken/status/1950021352318005447" target="_blank" class="quoted-tweet-link">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+            Quoting @DGlaucomflecken
+          </a>
+        </div>
+        <a href="https://x.com/aliceisplaying/status/1950163416380752200" target="_blank" class="viral-tweet-image">
+          <img src="https://pbs.twimg.com/media/GxBfSPlWIAAlYn8.jpg" alt="Tweet screenshot">
+        </a>
+      </div>
       <div class="quote-stats">
         <div class="quote-stat likes">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
@@ -1473,11 +1557,14 @@
       ['better', 195], ['make', 190], ['world', 185], ['point', 180], ['post', 175]
     ];
 
-    // Expanded emoji list
+    // Expanded emoji list (30 emojis) - original 15 + 15 more
     const topEmojis = [
       ['😇', 146], ['🟩', 127], ['❤️', 118], ['👏', 73], ['🙂', 70],
-      ['🤍', 53], ['🟨', 49], ['🦆', 41], ['🙇', 35], ['✨', 32],
-      ['💀', 28], ['🫶', 25], ['🥺', 22], ['💕', 20], ['🔥', 18]
+      ['🤍', 53], ['🟨', 49], ['🦆', 41], ['🙇', 35], ['🥹', 34],
+      ['✨', 32], ['😔', 32], ['😊', 32], ['👀', 30], ['💀', 28],
+      ['🫶', 25], ['🥰', 24], ['🥺', 22], ['🙏', 22], ['🖤', 21],
+      ['💕', 20], ['😭', 19], ['🚨', 19], ['🔥', 18], ['🤝', 18],
+      ['😳', 18], ['🥲', 13], ['💫', 13], ['✊', 12], ['😵', 12]
     ];
 
     // Particles

@@ -334,7 +334,7 @@ function analyzeTweets(allTweets) {
 
   stats.topEmojis = Object.entries(stats.emojiCount)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 10);
+    .slice(0, 50);
 
   stats.topSources = Object.entries(stats.sources)
     .sort((a, b) => b[1] - a[1])

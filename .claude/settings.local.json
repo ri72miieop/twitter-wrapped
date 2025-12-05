@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nexpand emojis to 30, fix mobile emoji grid layout\n\n- restore correct emoji counts (💀 at 28, etc)\n- add 15 more emojis from analyzer\n- remove scroll on mobile emoji section (smaller items, no max-height)\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

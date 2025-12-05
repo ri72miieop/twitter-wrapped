@@ -919,8 +919,15 @@
       to { width: 100%; }
     }
 
+    /* Mobile/Desktop toggles */
+    .mobile-only { display: none; }
+    .desktop-only { display: block; }
+
     /* Responsive */
     @media (max-width: 768px) {
+      .mobile-only { display: flex; }
+      .desktop-only { display: none !important; }
+
       section {
         padding: 24px 0;
         height: 100vh;
@@ -1044,6 +1051,33 @@
 
       .emoji-count {
         font-size: 11px;
+      }
+
+      /* Mobile combo sections */
+      .mobile-combo {
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .mobile-stat-pair {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        text-align: center;
+      }
+
+      .mobile-stat .big-stat-number {
+        font-size: clamp(48px, 14vw, 90px);
+      }
+
+      .mobile-stat .big-stat-label {
+        font-size: 12px;
+        margin-bottom: 8px;
+      }
+
+      .mobile-stat .big-stat-context {
+        font-size: 16px;
+        margin-top: 8px;
       }
 
       .vertical-chart {
@@ -1267,8 +1301,8 @@
     </div>
   </section>
 
-  <!-- Total Tweets -->
-  <section class="big-stat">
+  <!-- Total Tweets (desktop) -->
+  <section class="big-stat desktop-only">
     <div class="container reveal">
       <div class="big-stat-label">You posted</div>
       <div class="big-stat-number cyan counter" data-target="20864">0</div>
@@ -1279,14 +1313,36 @@
     </div>
   </section>
 
-  <!-- Total Likes Received -->
-  <section class="big-stat">
+  <!-- Total Likes Received (desktop) -->
+  <section class="big-stat desktop-only">
     <div class="container reveal">
       <div class="big-stat-label">Your tweets received</div>
       <div class="big-stat-number magenta counter" data-target="264786">0</div>
       <div class="big-stat-context">
         likes total<br>
         averaging <strong>12.7 likes</strong> per tweet
+      </div>
+    </div>
+  </section>
+
+  <!-- Combined: Tweets + Likes (mobile) -->
+  <section class="mobile-only mobile-combo">
+    <div class="container reveal">
+      <div class="mobile-stat-pair">
+        <div class="mobile-stat">
+          <div class="big-stat-label">You posted</div>
+          <div class="big-stat-number cyan counter" data-target="20864">0</div>
+          <div class="big-stat-context">tweets in 2025</div>
+        </div>
+        <div class="mobile-stat">
+          <div class="big-stat-label">You received</div>
+          <div class="big-stat-number magenta counter" data-target="264786">0</div>
+          <div class="big-stat-context">likes total</div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 24px;">
+        <span class="pill cyan">65 tweets per day</span>
+        <span class="pill magenta" style="margin-left: 8px;">12.7 likes each</span>
       </div>
     </div>
   </section>
@@ -1324,8 +1380,8 @@
     </div>
   </section>
 
-  <!-- Streak -->
-  <section class="big-stat">
+  <!-- Streak (desktop) -->
+  <section class="big-stat desktop-only">
     <div class="container reveal">
       <div class="big-stat-label">Longest posting streak</div>
       <div class="big-stat-number lime counter" data-target="161">0</div>
@@ -1374,14 +1430,36 @@
     </div>
   </section>
 
-  <!-- Most Active Day -->
-  <section class="big-stat">
+  <!-- Most Active Day (desktop) -->
+  <section class="big-stat desktop-only">
     <div class="container reveal">
       <div class="big-stat-label">Your most active day</div>
       <div class="big-stat-number gold counter" data-target="201">0</div>
       <div class="big-stat-context">
         tweets on <strong>March 21, 2025</strong><br>
         That's 8.4 tweets per hour
+      </div>
+    </div>
+  </section>
+
+  <!-- Combined: Streak + Most Active Day (mobile) -->
+  <section class="mobile-only mobile-combo">
+    <div class="container reveal">
+      <div class="mobile-stat-pair">
+        <div class="mobile-stat">
+          <div class="big-stat-label">Longest streak</div>
+          <div class="big-stat-number lime counter" data-target="161">0</div>
+          <div class="big-stat-context">days in a row</div>
+        </div>
+        <div class="mobile-stat">
+          <div class="big-stat-label">Most active day</div>
+          <div class="big-stat-number gold counter" data-target="201">0</div>
+          <div class="big-stat-context">tweets on Mar 21</div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 24px;">
+        <span class="pill lime">5+ months consistent</span>
+        <span class="pill gold" style="margin-left: 8px;">8.4 tweets/hour</span>
       </div>
     </div>
   </section>
@@ -1481,8 +1559,8 @@
     </div>
   </section>
 
-  <!-- Community Stats -->
-  <section class="breakdown-section">
+  <!-- Community Stats (desktop) -->
+  <section class="breakdown-section desktop-only">
     <div class="container reveal">
       <h2>Your community</h2>
       <div class="stats-grid">
@@ -1505,8 +1583,8 @@
     </div>
   </section>
 
-  <!-- Final Section -->
-  <section class="final-section">
+  <!-- Final Section (desktop) -->
+  <section class="final-section desktop-only">
     <div class="container reveal">
       <div class="final-title">
         See you in<br>
@@ -1519,6 +1597,39 @@
         <a href="https://twitter.com/aliceisplaying" target="_blank">@aliceisplaying</a> • London
       </div>
       <div style="margin-top: 48px; color: var(--text-dimmer); font-size: 12px;">
+        Generated from your Twitter archive • November 2025
+      </div>
+    </div>
+  </section>
+
+  <!-- Combined: Community + Final (mobile) -->
+  <section class="mobile-only mobile-combo final-section">
+    <div class="container reveal">
+      <div class="stats-grid" style="margin-bottom: 32px;">
+        <div class="stat-card">
+          <div class="stat-card-icon">👥</div>
+          <div class="stat-card-value" style="color: var(--cyan);"><span class="counter" data-target="5024">0</span></div>
+          <div class="stat-card-label">Followers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon">👤</div>
+          <div class="stat-card-value" style="color: var(--magenta);"><span class="counter" data-target="964">0</span></div>
+          <div class="stat-card-label">Following</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon">❤️</div>
+          <div class="stat-card-value" style="color: var(--gold);"><span class="counter" data-target="129824">0</span></div>
+          <div class="stat-card-label">Likes given</div>
+        </div>
+      </div>
+      <div class="final-title" style="font-size: clamp(36px, 10vw, 60px);">
+        See you in<br>
+        <span class="year">2026</span>
+      </div>
+      <div class="final-username" style="margin-top: 16px;">
+        <a href="https://twitter.com/aliceisplaying" target="_blank">@aliceisplaying</a> • London
+      </div>
+      <div style="margin-top: 24px; color: var(--text-dimmer); font-size: 11px;">
         Generated from your Twitter archive • November 2025
       </div>
     </div>

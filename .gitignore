@@ -5,3 +5,6 @@ data.json
 
 # Archive metadata
 Your archive.html
+
+# Playwright test screenshots
+.playwright-mcp/

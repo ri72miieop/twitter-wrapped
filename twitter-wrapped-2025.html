@@ -113,12 +113,18 @@
     }
 
     section {
+      height: 100vh;
+      height: 100dvh;
       min-height: 100vh;
+      min-height: 100dvh;
+      max-height: 100vh;
+      max-height: 100dvh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 80px 0;
+      padding: 40px 0;
       position: relative;
+      overflow: hidden;
     }
 
     /* Hero Section */
@@ -242,15 +248,15 @@
     }
 
     .big-stat-label {
-      font-size: 14px;
+      font-size: 18px;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--text-dim);
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
     .big-stat-number {
-      font-size: clamp(80px, 18vw, 200px);
+      font-size: clamp(90px, 20vw, 220px);
       font-weight: 900;
       line-height: 1;
       letter-spacing: -0.02em;
@@ -262,9 +268,9 @@
     .big-stat-number.gold { color: var(--gold); }
 
     .big-stat-context {
-      font-size: clamp(18px, 3vw, 28px);
+      font-size: clamp(22px, 3.5vw, 32px);
       color: var(--text-dim);
-      margin-top: 16px;
+      margin-top: 20px;
       font-weight: 300;
     }
 
@@ -410,12 +416,12 @@
     }
 
     .breakdown-value {
-      font-size: 36px;
+      font-size: 42px;
       font-weight: 700;
     }
 
     .breakdown-label {
-      font-size: 12px;
+      font-size: 16px;
       color: var(--text-dim);
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -424,16 +430,20 @@
 
     /* Chart Section */
     .chart-section h2 {
-      font-size: clamp(28px, 4vw, 48px);
+      font-size: clamp(32px, 5vw, 56px);
       font-weight: 700;
-      margin-bottom: 40px;
+      margin-bottom: 24px;
+    }
+
+    .chart-section p {
+      font-size: 18px;
     }
 
     .chart-container {
       background: var(--bg-card);
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 24px;
-      padding: 32px;
+      padding: 24px;
       overflow-x: auto;
     }
 
@@ -451,8 +461,8 @@
     }
 
     .bar-label {
-      width: 80px;
-      font-size: 12px;
+      width: 90px;
+      font-size: 14px;
       color: var(--text-dim);
       text-align: right;
       flex-shrink: 0;
@@ -489,9 +499,9 @@
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      height: 280px;
-      gap: 8px;
-      min-width: 600px;
+      height: 220px;
+      gap: 6px;
+      min-width: 500px;
     }
 
     .v-bar {
@@ -521,10 +531,10 @@
 
     .v-bar-value {
       position: absolute;
-      top: -24px;
+      top: -28px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 600;
       white-space: nowrap;
       opacity: 0;
@@ -536,44 +546,44 @@
     }
 
     .v-bar-label {
-      font-size: 12px;
+      font-size: 14px;
       color: var(--text-dim);
-      margin-top: 12px;
+      margin-top: 10px;
       text-transform: uppercase;
     }
 
     /* Top List */
     .top-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
 
     .top-item {
       display: flex;
       align-items: center;
-      gap: 20px;
-      padding: 20px;
+      gap: 12px;
+      padding: 14px 16px;
       background: var(--bg-card);
       border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 16px;
+      border-radius: 14px;
       transition: all 0.3s;
     }
 
     .top-item:hover {
       background: rgba(255,255,255,0.06);
-      transform: translateX(8px);
+      transform: translateX(4px);
     }
 
     .top-rank {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 18px;
-      border-radius: 12px;
+      font-size: 16px;
+      border-radius: 10px;
       flex-shrink: 0;
     }
 
@@ -589,27 +599,27 @@
 
     .top-name {
       font-weight: 600;
-      font-size: 18px;
-      margin-bottom: 4px;
+      font-size: 16px;
+      margin-bottom: 2px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .top-handle {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-dim);
     }
 
     .top-count {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 700;
       color: var(--cyan);
       flex-shrink: 0;
     }
 
     .top-count-label {
-      font-size: 11px;
+      font-size: 10px;
       color: var(--text-dim);
       text-transform: uppercase;
     }
@@ -618,11 +628,10 @@
     .word-cloud {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px 20px;
+      gap: 8px 14px;
       justify-content: center;
       align-items: center;
-      padding: 40px 20px;
-      min-height: 300px;
+      padding: 16px 12px;
     }
 
     .word {
@@ -639,18 +648,20 @@
     .emoji-grid {
       display: flex;
       justify-content: center;
-      gap: 24px;
+      gap: 16px;
       flex-wrap: wrap;
-      padding: 20px;
+      padding: 16px;
+      max-height: 320px;
+      overflow-y: auto;
     }
 
     .emoji-item {
       text-align: center;
       transition: transform 0.3s;
-      padding: 16px;
+      padding: 12px 14px;
       background: var(--bg-card);
-      border-radius: 16px;
-      min-width: 90px;
+      border-radius: 14px;
+      min-width: 75px;
     }
 
     .emoji-item:hover {
@@ -658,12 +669,12 @@
     }
 
     .emoji-char {
-      font-size: 48px;
-      margin-bottom: 8px;
+      font-size: 40px;
+      margin-bottom: 6px;
     }
 
     .emoji-count {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
       color: var(--text-dim);
     }
@@ -671,27 +682,28 @@
     /* Fun Facts */
     .fun-facts {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
 
     .fun-fact {
-      padding: 32px;
+      padding: 20px;
       background: var(--bg-card);
       border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 24px;
+      border-radius: 18px;
       position: relative;
+      text-align: center;
     }
 
     .fun-fact-emoji {
-      font-size: 48px;
-      margin-bottom: 16px;
+      font-size: 36px;
+      margin-bottom: 10px;
     }
 
     .fun-fact-value {
-      font-size: 32px;
+      font-size: 28px;
       font-weight: 800;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .fun-fact-label {
@@ -844,59 +856,296 @@
     /* Responsive */
     @media (max-width: 768px) {
       section {
-        padding: 60px 0;
-        min-height: auto;
+        padding: 24px 0;
+        height: 100vh;
+        height: 100dvh;
+        min-height: 100vh;
+        min-height: 100dvh;
+        max-height: 100vh;
+        max-height: 100dvh;
       }
 
-      .breakdown-grid {
-        grid-template-columns: 1fr;
+      .container {
+        padding: 0 16px;
       }
 
-      .stats-grid {
-        grid-template-columns: 1fr;
+      .big-stat-label {
+        font-size: 14px;
+        margin-bottom: 12px;
       }
 
-      .emoji-char {
-        font-size: 36px;
+      .big-stat-number {
+        font-size: clamp(60px, 18vw, 120px);
       }
 
-      .emoji-item {
-        min-width: 70px;
-        padding: 12px;
+      .big-stat-context {
+        font-size: 18px;
+        margin-top: 12px;
       }
 
-      .vertical-chart {
-        min-width: 500px;
-        height: 200px;
+      .hero-year {
+        font-size: clamp(80px, 22vw, 160px);
       }
 
-      .chart-container {
-        padding: 20px;
+      .hero-username {
+        font-size: clamp(20px, 5vw, 32px);
+        margin-top: 40px;
       }
 
-      .v-bar-label {
-        font-size: 10px;
+      .hero-avatar {
+        width: 60px;
+        height: 60px;
+        margin: 20px auto;
       }
 
-      .word-cloud {
-        padding: 20px 10px;
-      }
-
-      .top-item {
-        padding: 16px;
-      }
-
-      .top-name {
+      .hero-bio {
         font-size: 16px;
       }
 
+      .breakdown-section h2 {
+        font-size: 28px;
+        margin-bottom: 24px;
+      }
+
+      .breakdown-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+      }
+
+      .breakdown-item {
+        padding: 16px 8px;
+      }
+
+      .breakdown-value {
+        font-size: 24px;
+      }
+
+      .breakdown-label {
+        font-size: 10px;
+      }
+
+      .chart-section h2 {
+        font-size: 24px;
+        margin-bottom: 16px;
+      }
+
+      .chart-section p {
+        font-size: 14px;
+        margin-bottom: 16px !important;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .stat-card {
+        padding: 16px 12px;
+        border-radius: 16px;
+        text-align: center;
+      }
+
+      .stat-card-icon {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+
+      .stat-card-value {
+        font-size: 28px;
+      }
+
+      .stat-card-label {
+        font-size: 10px;
+      }
+
+      .emoji-grid {
+        gap: 10px;
+        padding: 8px;
+      }
+
+      .emoji-char {
+        font-size: 32px;
+      }
+
+      .emoji-item {
+        min-width: 60px;
+        padding: 10px 8px;
+        border-radius: 12px;
+      }
+
+      .emoji-count {
+        font-size: 13px;
+      }
+
+      .vertical-chart {
+        min-width: 100%;
+        height: 160px;
+        gap: 4px;
+      }
+
+      .chart-container {
+        padding: 12px;
+        overflow-x: auto;
+      }
+
+      .v-bar-label {
+        font-size: 9px;
+      }
+
+      .v-bar-value {
+        font-size: 10px;
+        top: -20px;
+      }
+
+      .word-cloud {
+        padding: 10px 6px;
+        gap: 6px 10px;
+      }
+
+      .top-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+      }
+
+      .top-item {
+        padding: 8px 10px;
+        gap: 8px;
+      }
+
+      .top-rank {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
+        border-radius: 8px;
+      }
+
+      .top-name {
+        font-size: 12px;
+      }
+
+      .top-handle {
+        font-size: 10px;
+      }
+
       .top-count {
-        font-size: 20px;
+        font-size: 14px;
+      }
+
+      .top-count-label {
+        font-size: 8px;
+      }
+
+      .bar-chart {
+        gap: 8px;
+      }
+
+      .bar-row {
+        gap: 10px;
       }
 
       .bar-label {
-        width: 60px;
+        width: 70px;
+        font-size: 11px;
+      }
+
+      .bar-track {
+        height: 28px;
+      }
+
+      .bar-value {
+        font-size: 11px;
+      }
+
+      .fun-facts {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .fun-fact {
+        padding: 12px 8px;
+        border-radius: 14px;
+      }
+
+      .fun-fact-emoji {
+        font-size: 28px;
+        margin-bottom: 6px;
+      }
+
+      .fun-fact-value {
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+
+      .fun-fact-label {
         font-size: 10px;
+      }
+
+      .quote-text {
+        font-size: clamp(24px, 6vw, 40px);
+      }
+
+      .quote-mark {
+        font-size: 150px;
+        top: -30px;
+      }
+
+      .quote-stats {
+        margin-top: 16px;
+      }
+
+      .quote-stat {
+        font-size: 18px;
+      }
+
+      .quote-stat svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .quote-meta {
+        margin-top: 20px;
+        font-size: 14px;
+      }
+
+      .pill {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+
+      .final-title {
+        font-size: clamp(36px, 12vw, 80px);
+      }
+
+      .final-subtitle {
+        font-size: 18px;
+      }
+
+      .final-username {
+        margin-top: 32px;
+        font-size: 16px;
+      }
+
+      .scroll-indicator {
+        bottom: 20px;
+      }
+    }
+
+    /* Extra small screens */
+    @media (max-width: 380px) {
+      .breakdown-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .breakdown-value {
+        font-size: 20px;
+      }
+
+      .fun-facts {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
   </style>
@@ -1050,7 +1299,7 @@
     <div class="container reveal">
       <h2>Your favorite day to tweet</h2>
       <div class="chart-container">
-        <div class="vertical-chart" id="dayChart" style="min-width: 400px;"></div>
+        <div class="vertical-chart" id="dayChart"></div>
       </div>
       <div style="margin-top: 24px; text-align: center;">
         <span class="pill lime">Wednesday is your peak day</span>
@@ -1376,9 +1625,9 @@
         span.className = 'word';
         span.textContent = word;
 
-        // Scale from 14px to 56px based on count
-        const minSize = 14;
-        const maxSize = 56;
+        // Scale from 12px to 44px based on count (smaller for mobile fit)
+        const minSize = 12;
+        const maxSize = 44;
         const ratio = count / maxCount;
         const size = minSize + (ratio * (maxSize - minSize));
 

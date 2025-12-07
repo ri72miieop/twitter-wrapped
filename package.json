@@ -2,13 +2,23 @@
   "name": "twitter-wrapped",
   "private": true,
   "scripts": {
-    "dev": "npx @react-grab/claude-code@latest && vite",
+    "dev": "bun --hot server.ts",
+    "dev:cf": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
     "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241127.0",
     "@types/bun": "latest",
-    "vite": "^7.2.6"
+    "vite": "^7.2.6",
+    "wrangler": "^4.53.0"
+  },
+  "dependencies": {
+    "@cf-wasm/resvg": "^0.3.3",
+    "@cf-wasm/satori": "^0.3.3",
+    "nanoid": "^5.0.9"
   },
   "peerDependencies": {
     "typescript": "^5"

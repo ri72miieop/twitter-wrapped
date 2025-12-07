@@ -1,0 +1,42 @@
+# Twitter Wrapped - Cloudflare Workers Configuration
+#
+# Setup Instructions:
+# 1. Copy this file to wrangler.toml: cp wrangler.example.toml wrangler.toml
+# 2. Run: wrangler login
+# 3. Create KV namespaces:
+#    wrangler kv:namespace create WRAPPED_DATA
+#    wrangler kv:namespace create WRAPPED_DATA --preview
+# 4. Copy the IDs from the output and paste them below
+# 5. Update the custom domain or remove the routes section for workers.dev
+# 6. Deploy: bun run deploy
+
+name = "twitter-wrapped"
+main = "src/worker.ts"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = false
+preview_urls = false
+
+# Custom domain - update or remove for workers.dev deployment
+routes = [
+  { pattern = "your-domain.com", custom_domain = true }
+]
+
+[vars]
+ENVIRONMENT = "production"
+
+# Stores shared wrapped data (expires after 1 year)
+# Run: wrangler kv:namespace create WRAPPED_DATA
+# Run: wrangler kv:namespace create WRAPPED_DATA --preview
+[[kv_namespaces]]
+binding = "WRAPPED_DATA"
+id = "your-kv-namespace-id"
+preview_id = "your-preview-kv-namespace-id"
+
+# Analytics Engine for event logging (queryable via SQL)
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+dataset = "wrapped_events"
+
+[dev]
+port = 3000

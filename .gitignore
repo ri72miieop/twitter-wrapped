@@ -12,3 +12,11 @@ Your archive.html
 # Build output
 dist/
 node_modules/
+
+# Environment variables
+.env
+.dev.vars
+
+# Wrangler config (contains KV IDs and custom domain)
+wrangler.toml
+.wrangler/
